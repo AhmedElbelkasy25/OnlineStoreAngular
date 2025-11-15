@@ -14,6 +14,9 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
+            "polyfills": [
+                "zone.js"
+              ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -22,11 +25,10 @@
               }
             ],
             "styles": [
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "./node_modules/font-awesome/css/font-awesome.min.css",
+              
               "src/styles.css"
-            ],
-            "scripts": ["./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
+            ]
+            
           },
           "configurations": {
             "production": {

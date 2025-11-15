@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { UserComponent } from './layouts/user-component/user-component';
 import { AuthComponent } from './layouts/auth-component/auth-component';
+import { AdminComponent } from './layouts/admin-component/admin-component';
 
 export const routes: Routes = [
   {
@@ -35,6 +36,21 @@ export const routes: Routes = [
       {
         path: 'login',
         loadChildren: () => import('./auth/auth-module').then((m) => m.AuthModule),
+      },
+    ],
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'category',
+        pathMatch: 'full',
+      },
+      {
+        path: 'category',
+        loadChildren: () => import('./admin/admin-module').then((m) => m.AdminModule),
       },
     ],
   },
