@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { AdminRoutingModule } from '../../admin/admin-routing-module';
 import { RouterOutlet } from '@angular/router';
+import { NavBarComponent } from './navBar/navBar.component';
 
 @Component({
   selector: 'app-admin-component',
   standalone: true,
-  imports: [AdminRoutingModule, RouterOutlet],
+  imports: [RouterOutlet, NavBarComponent],
   templateUrl: './admin-component.html',
-  styleUrls: ['./admin-component.css'],
+  styleUrls: ['./admin-component.scss'],
 })
 export class AdminComponent {}

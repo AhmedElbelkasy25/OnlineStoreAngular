@@ -26,7 +26,8 @@
             ],
             "styles": [
               
-              "src/styles.css"
+              "src/styles.scss",
+              "node_modules/@coreui/coreui/dist/css/coreui.min.css"
             ]
             
           },
@@ -86,7 +87,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss",
+              "node_modules/@coreui/coreui/dist/css/coreui.min.css"
             ]
           }
         }
