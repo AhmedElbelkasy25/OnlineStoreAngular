@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="registerComponent.component.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Title section -->
+      <div class="title"></div>
+      <div class="content">
+        <div class="text-danger">
+          @for (item of errs;track item) {
+          <span> {{ item }} </span> <br />
+          }
+        </div>
+        <!-- Registration form -->
+        <form #registerFrm="ngForm" (ngSubmit)="register()">
+          <div class="user-details">
+            <!-- Input for Full Name -->
+            <div class="input-box">
+              <span class="details">Full Name</span>
+              <input
+                type="text"
+                name="name"
+                #name="ngModel"
+                [(ngModel)]="user.Name"
+                placeholder="Enter your name"
+                required
+                minlength="3"
+              />
+              <span [hidden]="name.valid || name.untouched" class="text-danger">
+                @if(name.hasError('required')) { this field is reqiured }
+                @if(name.hasError('minlength')) { the name must be more than 3 chars }
+              </span>
+            </div>
+
+            <!-- Input for Username -->
+            <div class="input-box">
+              <span class="details">Username</span>
+              <input
+                type="text"
+                name="userName"
+                #userName="ngModel"
+                [(ngModel)]="user.userName"
+                placeholder="Enter your username"
+                minlength="3"
+                required
+              />
+              <span [hidden]="userName.valid || userName.untouched" class="text-danger">
+                @if(userName.hasError('required')) { this field is reqiured }
+                @if(userName.hasError('minlength')) { the userName must be more than 3 chars }
+              </span>
+            </div>
+            <!-- Input for Email -->
+            <div class="input-box">
+              <span class="details">Email</span>
+              <input
+                type="text"
+                name="Email"
+                #email="ngModel"
+                [(ngModel)]="user.Email"
+                placeholder="Enter your email"
+                required
+                email
+              />
+              <span [hidden]="email.valid || email.untouched" class="text-danger">
+                @if(email.hasError('required')) { This field is required }
+                @if(email.hasError('email')) { Please enter a valid email address }
+              </span>
+            </div>
+            <!-- Input for Phone Number -->
+            <!-- <div class="input-box">
+              <span class="details">Phone Number</span>
+              <input type="text" placeholder="Enter your number" required />
+            </div> -->
+            <!-- Input for Password -->
+            <div class="input-box">
+              <span class="details">Password</span>
+              <input
+                id="password"
+                name="password"
+                #pass="ngModel"
+                [(ngModel)]="user.password"
+                type="password"
+                placeholder="Enter your password"
+                required
+                minlength="8"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
+              />
+              <span [hidden]="pass.valid || pass.untouched" class="text-danger">
+                @if(pass.hasError('required')) { This field is required }
+                @if(pass.hasError('minlength')) { Password must be at least 8 characters }
+                @if(pass.hasError('pattern')) { Password must contain uppercase, lowercase, and
+                number }
+              </span>
+            </div>
+            <!-- Input for Confirm Password -->
+            <div class="input-box">
+              <span class="details">Confirm Password</span>
+              <input
+                id="confirmPassword"
+                type="password"
+                name="confirmPassword"
+                #conPass="ngModel"
+                [(ngModel)]="user.confirmPassword"
+                placeholder="Confirm your password"
+                required
+              />
+              <span [hidden]="conPass.valid || conPass.untouched" class="text-danger">
+                @if(conPass.hasError('required')) { This field is required }
+              </span>
+              @if((conPass.value != pass.value) && (conPass.valid && pass.valid) &&
+              (conPass.touched)) {
+              <span class="text-danger"> Passwords do not match</span>
+              }
+            </div>
+          </div>
+
+          <span class="text-danger">
+            <h3>{{ errMsg }}</h3>
+          </span>
+          <!-- Submit button -->
+          <div class="button">
+            <input [disabled]="!registerFrm.form.valid" type="submit" value="Register" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

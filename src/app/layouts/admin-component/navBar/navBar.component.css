@@ -6,6 +6,11 @@
   right: 0;
   z-index: 1030;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.navbar.sidebar-open {
+  margin-left: 280px;
 }
 
 .sidebar-toggle-btn {
@@ -94,12 +99,26 @@
   text-decoration: none;
   transition: all 0.2s ease;
   gap: 12px;
+  position: relative;
 }
 
 .sidebar-link:hover {
   background-color: rgba(255, 255, 255, 0.1);
   color: #fff;
   padding-left: 25px;
+}
+
+.sidebar-link.active {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: #fff;
+  border-left: 4px solid #4CAF50;
+  padding-left: 21px;
+  font-weight: 600;
+}
+
+.sidebar-link.active svg {
+  opacity: 1;
+  fill: #4CAF50;
 }
 
 .sidebar-link svg {
@@ -181,6 +200,10 @@
     left: 0;
   }
   
+  .navbar.sidebar-open {
+    margin-left: 280px;
+  }
+  
   .main-content.sidebar-open {
     margin-left: 280px;
   }
@@ -200,6 +223,10 @@
     left: 0;
   }
   
+  .navbar.sidebar-open {
+    margin-left: 0 !important;
+  }
+  
   .main-content {
     margin-left: 0 !important;
   }
@@ -208,6 +235,21 @@
     display: block;
   }
 }
+
+/* Active link style */
+.sidebar-link.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-left: 4px solid #4CAF50; /* خط أخضر على الشمال */
+  padding-left: 21px; /* عشان الخط ما يأثرش على المحاذاة */
+  font-weight: 600;
+}
+
+.sidebar-link.active svg {
+  opacity: 1;
+  color: #4CAF50; /* لون أخضر للـ icon */
+}
+
 
 /* Small mobile screens */
 @media (max-width: 576px) {
@@ -225,7 +267,7 @@
   }
 }
 
-/* Animation للعناصر */
+
 @keyframes slideIn {
   from {
     opacity: 0;

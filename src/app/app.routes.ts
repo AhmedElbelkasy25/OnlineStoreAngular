@@ -28,13 +28,13 @@ export const routes: Routes = [
     path: 'auth',
     component: AuthComponent,
     children: [
+      // {
+      //   path: '',
+      //   redirectTo: 'login',
+      //   pathMatch: 'full',
+      // },
       {
         path: '',
-        redirectTo: 'login',
-        pathMatch: 'full',
-      },
-      {
-        path: 'login',
         loadChildren: () => import('./auth/auth-module').then((m) => m.AuthModule),
       },
     ],
@@ -45,11 +45,6 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'category',
-        pathMatch: 'full',
-      },
-      {
-        path: 'category',
         loadChildren: () => import('./admin/admin-module').then((m) => m.AdminModule),
       },
     ],

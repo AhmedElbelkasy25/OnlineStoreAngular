@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ICategory } from '../models/icategory';
 import { Observable } from 'rxjs';
@@ -17,5 +17,14 @@ export class CategoryService {
   }
   getCategoryById(id: number): Observable<ICatgeoryResponse> {
     return this.httpClient.get<ICatgeoryResponse>(`${environment.apiBaseUrl}/Categories/${id}`);
+  }
+  addCatgeory(cat: ICategory): Observable<ICategory> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    return this.httpClient.post<ICategory>(`${environment.apiBaseUrl}/categories`, cat, {
+      headers,
+    });
   }
 }

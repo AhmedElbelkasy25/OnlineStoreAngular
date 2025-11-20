@@ -1,0 +1,83 @@
+<div class="container">
+  <div [hidden]="submitted">
+    <form #myfrm="ngForm" (submit)="submitForm()">
+      <div class="mb-3">
+        <label class="form-label" for="Name">Category Name</label>
+        <input
+          class="form-control"
+          [(ngModel)]="newCategory.name"
+          required
+          pattern="^[A-Za-zأ-ي\s]{3,100}$"
+          name="Name"
+          id="Name"
+          placeholder="Category Name"
+          type="text"
+          #name="ngModel"
+        />
+        <div [hidden]="name.valid || (name.invalid && name.untouched)" class="text-danger">
+          @if(name.hasError('required')) {
+          <p>this name is required</p>
+          } @if(name.hasError('pattern')){
+          <p>the name must be in 3 to 100 charechter</p>
+          }
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="Description">Description</label>
+        <input
+          [(ngModel)]="newCategory.description"
+          class="form-control"
+          required
+          pattern="^[A-Za-zأ-ي\s]{3,1000}$"
+          placeholder="Category Description"
+          name="Description"
+          id="Description"
+          type="textarea"
+          #description="ngModel"
+        />
+        <div
+          [hidden]="description.valid || (description.invalid && description.untouched)"
+          class="text-danger"
+        >
+          @if(description.hasError('required')) {
+          <p>this description is required</p>
+          } @if(description.hasError('pattern')){
+          <p>the description must be in 3 to 1000 charechter</p>
+          }
+        </div>
+      </div>
+      <div class="mb-3">
+        <select [(ngModel)]="newCategory.status" name="status" class="form-select">
+          <option value="true">true</option>
+          <option value="false">false</option>
+        </select>
+      </div>
+      <input class="btn btn-primary" [disabled]="!myfrm.form.valid" value="Create" type="submit" />
+    </form>
+  </div>
+
+  <div [hidden]="!submitted">
+    <h2>You Will Create the following:</h2>
+    <div class="row">
+      <div class="col-xs-3">Name:</div>
+      <div class="col-xs-9">
+        <h2>{{ newCategory.name }}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Description:</div>
+      <div class="col-xs-9">
+        <h2>{{ newCategory.description }}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">status:</div>
+      <div class="col-xs-9">
+        <h2>{{ newCategory.status }}</h2>
+      </div>
+    </div>
+    <br />
+    <button type="button" class="btn btn-warning" (click)="submitForm()">Edit</button>
+    <button type="button" class="btn btn-success mx-3" (click)="addCatgeory()">Ok...Create</button>
+  </div>
+</div>

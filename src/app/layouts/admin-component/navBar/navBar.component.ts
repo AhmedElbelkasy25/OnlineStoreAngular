@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   ButtonDirective,
   CollapseDirective,
@@ -25,6 +26,8 @@ import {
   styleUrls: ['./navBar.component.css'],
   imports: [
     CommonModule,
+    RouterLink,
+    RouterLinkActive,
     NavbarComponent,
     ContainerComponent,
     NavbarBrandDirective,
