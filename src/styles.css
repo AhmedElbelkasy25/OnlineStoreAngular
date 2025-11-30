@@ -1,2 +1,22 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 /* @import "font-awesome/css/font-awesome.min.css"; *//*# sourceMappingURL=styles.css.map */
+
+
+/* Global snack-bar styles */
+.snack-success.mat-mdc-snack-bar-container {
+  background-color: #28a745 !important; /* خلفية خضراء */
+}
+
+.snack-success .mat-mdc-snack-bar-label {
+  color: white !important; /* لون النص */
+  font-weight: bold !important;
+}
+
+.snack-error.mat-mdc-snack-bar-container {
+  background-color: #dc3545 !important;
+}
+
+.snack-error .mat-mdc-snack-bar-label {
+  color: white !important;
+  font-weight: bold !important;
+}

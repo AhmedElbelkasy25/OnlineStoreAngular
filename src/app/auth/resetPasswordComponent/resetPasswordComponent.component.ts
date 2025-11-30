@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IResetPassword } from '../../interfaces/auth/i-reset-password';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServiceService } from '../../services/authService.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-resetPasswordComponent',
@@ -20,7 +21,8 @@ export class ResetPasswordComponentComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private authService: AuthServiceService,
-    private router: Router
+    private router: Router,
+    private snack: MatSnackBar
   ) {
     this.userid = this.activatedRoute.snapshot.queryParamMap.get('userId') || '';
     this.token = this.activatedRoute.snapshot.queryParamMap.get('token') || '';
@@ -35,11 +37,19 @@ export class ResetPasswordComponentComponent implements OnInit {
   resetPassword() {
     this.authService.resetPassword(this.resetPass).subscribe({
       next: (res) => {
+        this.snack.open('the password has been reset successfully', 'close', {
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+        });
         this.router.navigate(['auth/login']);
       },
       error: (err) => {
         this.errMsg = err.error.message;
         this.errs = err.error.errors;
+        this.snack.open(this.errMsg, 'close', {
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+        });
       },
     });
   }

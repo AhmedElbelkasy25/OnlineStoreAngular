@@ -9,7 +9,7 @@
   <body>
     <div class="container">
       <!-- Title section -->
-      <div class="title"></div>
+      <div class="title">Register</div>
       <div class="content">
         <div class="text-danger">
           @for (item of errs;track item) {
@@ -127,6 +127,7 @@
             <input [disabled]="!registerFrm.form.valid" type="submit" value="Register" />
           </div>
         </form>
+        <a class="" routerLink="/auth/login">Login</a>
       </div>
     </div>
   </body>

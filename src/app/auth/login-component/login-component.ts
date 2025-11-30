@@ -3,11 +3,11 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IloginRequest } from '../../interfaces/auth/IloginRequest';
 import { AuthServiceService } from '../../services/authService.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login-component',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './login-component.html',
   styleUrl: './login-component.css',
 })
@@ -28,6 +28,7 @@ export class LoginComponent {
       next: (res) => {
         console.log(res.token);
         localStorage.setItem('token', res.token);
+        localStorage.setItem('refreshToken', res.refreshToken);
         this.router.navigate(['user']);
       },
       error: (err) => {

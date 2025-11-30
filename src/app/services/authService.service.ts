@@ -1,61 +1,74 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { IRegisterResponse } from '../interfaces/auth/IRegisterResponse';
 import { environment } from '../../environments/environment.development';
 import { IloginRequest } from '../interfaces/auth/IloginRequest';
 import { ILoginResponse } from '../interfaces/auth/IloginResponse';
 import { IResetPassword } from '../interfaces/auth/i-reset-password';
 import { IForgetPassword } from '../interfaces/auth/iforget-password';
+import { IRefreshTokenResponse } from '../interfaces/auth/IRefreshTokenResponse';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthServiceService {
-  constructor(private httpClient: HttpClient) {}
-  register(user: User): Observable<IRegisterResponse> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
+  private baseUrl = environment.apiBaseUrl;
+  tokenExpired$: Subject<boolean> = new Subject<boolean>();
+  private header = new HttpHeaders({
+    'Content-Type': 'application/json',
+  });
 
-    return this.httpClient.post<IRegisterResponse>(
-      `${environment.apiBaseUrl}/accounts/register`,
-      user,
-      { headers }
-    );
+  constructor(private httpClient: HttpClient, private snackbar: MatSnackBar) {
+    this.tokenExpired$.subscribe((res: boolean) => {
+      if (res) {
+        this.RefreshToken();
+      }
+    });
+  }
+
+  register(user: User): Observable<IRegisterResponse> {
+    return this.httpClient.post<IRegisterResponse>(`${this.baseUrl}/accounts/register`, user, {
+      headers: this.header,
+    });
   }
 
   login(log: IloginRequest): Observable<ILoginResponse> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    return this.httpClient.post<ILoginResponse>(`${environment.apiBaseUrl}/accounts/login`, log, {
-      headers,
+    return this.httpClient.post<ILoginResponse>(`${this.baseUrl}/accounts/login`, log, {
+      headers: this.header,
     });
   }
 
   resetPassword(reset: IResetPassword): Observable<string> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
+    return this.httpClient.post<string>(`${this.baseUrl}/accounts/Reset Password`, reset, {
+      headers: this.header,
     });
-
-    return this.httpClient.post<string>(
-      `${environment.apiBaseUrl}/accounts/Reset Password`,
-      reset,
-      { headers }
-    );
   }
 
   forgetPassword(forget: IForgetPassword): Observable<string> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
+    return this.httpClient.post<string>(`${this.baseUrl}/Accounts/Forget Password`, forget, {
+      headers: this.header,
     });
+  }
 
-    return this.httpClient.post<string>(
-      `${environment.apiBaseUrl}/Accounts/Forget Password`,
-      forget,
-      { headers }
+  RefreshToken(): Observable<IRefreshTokenResponse> {
+    const refresh = {
+      accessToken: localStorage.getItem('token'),
+      refreshToken: localStorage.getItem('refreshToken'),
+    };
+    return this.httpClient.post<IRefreshTokenResponse>(
+      `${this.baseUrl}/Accounts/RefreshToken`,
+      refresh,
+      {
+        headers: this.header,
+      }
     );
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
   }
 }

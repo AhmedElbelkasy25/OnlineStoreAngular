@@ -29,6 +29,9 @@
                 placeholder="Enter your Email or user name"
                 required
               />
+              <span [hidden]="account.valid || account.untouched" class="text-danger">
+                @if(password.hasError('required')) { this field is required }
+              </span>
             </div>
 
             <!-- Input for Password -->
@@ -41,7 +44,15 @@
                 name="password"
                 placeholder="Enter your password"
                 required
+                minlength="8"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
               />
+              <span [hidden]="password.valid || password.untouched" class="text-danger">
+                @if(password.hasError('required')) { the password is required }
+                @if(password.hasError('minlength')) { Password must be at least 8 characters }
+                @if(password.hasError('pattern')) { Password must contain uppercase, lowercase, and
+                number }
+              </span>
             </div>
             <div>
               <label class="details" for="rememberMe"> rememberMe </label>
@@ -61,6 +72,8 @@
             <input [disabled]="!loginFrm.form.valid" type="submit" value="login" />
           </div>
         </form>
+        <a class="" routerLink="/auth/register">Register</a> <br />
+        <a class="" routerLink="/auth/forgetPassword">forget Password</a>
       </div>
     </div>
   </body>

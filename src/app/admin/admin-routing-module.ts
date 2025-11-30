@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CategoryComponent } from './categories/category/category.component';
 import { AddCatgeoryComponent } from './categories/addCategory/addCategory.component';
 import { CategoryDetailsComponent } from './categories/categoryDetails/categoryDetails.component';
+import { EditCatgeoryComponent } from './categories/editCatgeory/editCatgeory.component';
+import { NotFoundComponent } from './NotFound/NotFound.component';
 
 const routes: Routes = [
   {
@@ -22,10 +24,19 @@ const routes: Routes = [
         component: AddCatgeoryComponent,
       },
       {
-        path: 'categoryDetails/:id',
+        path: 'Details/:id',
         component: CategoryDetailsComponent,
       },
+      {
+        path: 'edit/:id',
+        component: EditCatgeoryComponent,
+      },
     ],
+  },
+
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
 

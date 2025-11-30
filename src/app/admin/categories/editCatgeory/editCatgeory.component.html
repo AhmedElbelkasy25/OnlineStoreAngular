@@ -1,13 +1,14 @@
 <div class="container">
   <div [hidden]="submitted">
     <form #myfrm="ngForm" (submit)="submitForm()">
+      {{ category | json }}
       <div class="mb-3">
         <label class="form-label" for="Name">Category Name</label>
         <input
           class="form-control"
-          [(ngModel)]="newCategory.name"
+          [(ngModel)]="category!.name"
           required
-          pattern="^[A-Za-z1-9أ-ي\s]{3,100}$"
+          minlength="3"
           name="Name"
           id="Name"
           placeholder="Category Name"
@@ -17,7 +18,7 @@
         <div [hidden]="name.valid || (name.invalid && name.untouched)" class="text-danger">
           @if(name.hasError('required')) {
           <p>this name is required</p>
-          } @if(name.hasError('pattern')){
+          } @if(name.hasError('minlength')){
           <p>the name must be in 3 to 100 charechter</p>
           }
         </div>
@@ -25,10 +26,10 @@
       <div class="mb-3">
         <label class="form-label" for="Description">Description</label>
         <input
-          [(ngModel)]="newCategory.description"
+          [(ngModel)]="category!.description"
           class="form-control"
           required
-          pattern="^[A-Za-z1-9أ-ي\s]{3,1000}$"
+          minlength="3"
           placeholder="Category Description"
           name="Description"
           id="Description"
@@ -41,13 +42,13 @@
         >
           @if(description.hasError('required')) {
           <p>this description is required</p>
-          } @if(description.hasError('pattern')){
+          } @if(description.hasError('minlength')){
           <p>the description must be in 3 to 1000 charechter</p>
           }
         </div>
       </div>
       <div class="mb-3">
-        <select [(ngModel)]="newCategory.status" name="status" class="form-select">
+        <select [(ngModel)]="category!.status" name="status" class="form-select">
           <option [ngValue]="true">true</option>
           <option [ngValue]="false">false</option>
         </select>
@@ -57,27 +58,27 @@
   </div>
 
   <div [hidden]="!submitted">
-    <h2>You Will Create the following:</h2>
+    <h2>You Will Edit the following:</h2>
     <div class="row">
       <div class="col-xs-3">Name:</div>
       <div class="col-xs-9">
-        <h2>{{ newCategory.name }}</h2>
+        <h2>{{ category!.name }}</h2>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-3">Description:</div>
       <div class="col-xs-9">
-        <h2>{{ newCategory.description }}</h2>
+        <h2>{{ category!.description }}</h2>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-3">status:</div>
       <div class="col-xs-9">
-        <h2>{{ newCategory.status }}</h2>
+        <h2>{{ category!.status }}</h2>
       </div>
     </div>
     <br />
     <button type="button" class="btn btn-warning" (click)="submitForm()">Edit</button>
-    <button type="button" class="btn btn-success mx-3" (click)="addCatgeory()">Ok...Create</button>
+    <button type="button" class="btn btn-success mx-3" (click)="editCategory()">Ok...Submit</button>
   </div>
 </div>

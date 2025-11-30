@@ -1,0 +1,33 @@
+.not-found-container {
+  text-align: center;
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.not-found-container h1 {
+  font-size: 120px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.not-found-container p {
+  font-size: 20px;
+  margin: 15px 0;
+}
+
+.home-btn {
+  margin-top: 20px;
+  padding: 10px 25px;
+  font-size: 18px;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 1px solid #444;
+  transition: 0.3s;
+}
+
+.home-btn:hover {
+  background: #444;
+  color: #fff;
+}

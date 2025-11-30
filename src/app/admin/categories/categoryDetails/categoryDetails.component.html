@@ -1,2 +1,24 @@
-<p>categoryDetails works! {{ currentId }}</p>
-<p>{{ category.name }}</p>
+<div class="details-container">
+  <div class="details-card">
+    <h2>Category Details</h2>
+
+    <div class="details-row">
+      <span class="label">Name:</span>
+      <span class="value">{{ category.name }}</span>
+    </div>
+
+    <div class="details-row">
+      <span class="label">Description:</span>
+      <span class="value">{{ category.description }}</span>
+    </div>
+
+    <div class="details-row">
+      <span class="label">Status:</span>
+      <span class="value" [ngClass]="{ active: category.status, inactive: !category.status }">
+        {{ category.status ? 'Active' : 'Inactive' }}
+      </span>
+    </div>
+
+    <button class="back-btn" routerLink="/admin/category">Back</button>
+  </div>
+</div>
