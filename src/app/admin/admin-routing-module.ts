@@ -5,6 +5,7 @@ import { AddCatgeoryComponent } from './categories/addCategory/addCategory.compo
 import { CategoryDetailsComponent } from './categories/categoryDetails/categoryDetails.component';
 import { EditCatgeoryComponent } from './categories/editCatgeory/editCatgeory.component';
 import { NotFoundComponent } from './NotFound/NotFound.component';
+import { BrandComponent } from './brands/brand/brand.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,27 @@ const routes: Routes = [
       },
       {
         path: 'add', // /admin/category/add
+        component: AddCatgeoryComponent,
+      },
+      {
+        path: 'Details/:id',
+        component: CategoryDetailsComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: EditCatgeoryComponent,
+      },
+    ],
+  },
+  {
+    path: 'brand',
+    children: [
+      {
+        path: '',
+        component: BrandComponent,
+      },
+      {
+        path: 'add',
         component: AddCatgeoryComponent,
       },
       {

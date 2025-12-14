@@ -1,41 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { ICategory } from '../../../models/icategory';
-import { CategoryService } from '../../../services/category-service.service';
+import { IBrand } from '../../../models/ibrand';
+import { BrandServiceService } from '../../../services/brandService.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import Swal from 'sweetalert2';
-import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
-  selector: 'app-category',
-  standalone: true,
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css'],
+  selector: 'app-brand',
+  templateUrl: './brand.component.html',
+  styleUrls: ['./brand.component.css'],
   imports: [RouterLink, CommonModule],
 })
-export class CategoryComponent implements OnInit {
-  allCategories!: ICategory[];
+export class BrandComponent implements OnInit {
+  allBrands: IBrand[] = {} as IBrand[];
 
-  constructor(private catService: CategoryService, private snack: MatSnackBar) {
-    // this.allCategories = [];
-    this.catService.getallCategory().subscribe({
-      next: (cat) => {
-        this.allCategories = cat.categories;
-
-        // console.log(this.allCategories);
+  constructor(private brandService: BrandServiceService, private snack: MatSnackBar) {
+    // this.allBrands = [];
+    debugger;
+    this.brandService.getallBrands().subscribe({
+      next: (brand) => {
+        this.allBrands = brand.brands;
+        debugger;
+        // console.log(this.allBrands);
       },
-      error: (err) =>
+      error: (err) => {
+        console.log(err);
+        debugger;
         this.snack.open(err.error.msg, 'Close 🤷‍♂️', {
           duration: 4000,
           panelClass: ['snack-error'],
           horizontalPosition: 'right',
           verticalPosition: 'bottom',
-        }),
+        });
+        debugger;
+      },
     });
+    debugger;
   }
   ngOnInit(): void {}
 
   Delete(id: number) {
-    this.catService.deleteCategory(id).subscribe({
+    this.brandService.deleteBrand(id).subscribe({
       next: (res) => {
         // alert(res.msg);
         Swal.fire({
@@ -51,7 +57,7 @@ export class CategoryComponent implements OnInit {
           horizontalPosition: 'right',
           verticalPosition: 'bottom',
         });
-        this.allCategories = this.allCategories.filter((cat) => cat.id !== id);
+        this.allBrands = this.allBrands.filter((brand) => brand.id !== id);
       },
       error: (err) => {
         this.snack.open(err.error.msg, 'Close 🤷‍♂️', {
@@ -67,7 +73,7 @@ export class CategoryComponent implements OnInit {
   ConfirmDelete(id: number) {
     Swal.fire({
       title: 'Are you sure?',
-      text: 'You will not be able to recover this category!',
+      text: 'You will not be able to recover this brand!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',

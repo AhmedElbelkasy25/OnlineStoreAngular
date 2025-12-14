@@ -11,6 +11,8 @@ import { IForgetPassword } from '../interfaces/auth/iforget-password';
 import { IRefreshTokenResponse } from '../interfaces/auth/IRefreshTokenResponse';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { Router } from '@angular/router';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -20,8 +22,13 @@ export class AuthServiceService {
   private header = new HttpHeaders({
     'Content-Type': 'application/json',
   });
+  // external login
 
-  constructor(private httpClient: HttpClient, private snackbar: MatSnackBar) {
+  constructor(
+    private httpClient: HttpClient,
+    private snackbar: MatSnackBar,
+    private router: Router
+  ) {
     this.tokenExpired$.subscribe((res: boolean) => {
       if (res) {
         this.RefreshToken();
@@ -71,4 +78,6 @@ export class AuthServiceService {
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
   }
+
+  // External Login
 }

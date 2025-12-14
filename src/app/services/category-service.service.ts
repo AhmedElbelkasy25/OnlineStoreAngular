@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { ICategoryArrResponse } from '../interfaces/category/ICategoryArrResponse';
 import { ICatgeoryResponse } from '../interfaces/category/ICatgeoryResponse';
-import { basePlacements } from '@popperjs/core';
 import { IEditCategoryResponse } from '../interfaces/category/IEditCategoryResponse';
 import { IDeleteCatgeoryResponse } from '../interfaces/category/IDeleteCatgeoryResponse';
 

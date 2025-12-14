@@ -1,11 +1,13 @@
 /* Importing Google Fonts - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
 body {
   height: 100vh;
   display: flex;
@@ -14,6 +16,7 @@ body {
   padding: 10px;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
+
 .container {
   max-width: 700px;
   width: 100%;
@@ -22,11 +25,13 @@ body {
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
+
 .container .title {
   font-size: 25px;
   font-weight: 500;
   position: relative;
 }
+
 .container .title::before {
   content: "";
   position: absolute;
@@ -37,21 +42,25 @@ body {
   border-radius: 5px;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
+
 .content form .user-details {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 20px 0 12px 0;
 }
+
 form .user-details .input-box {
   margin-bottom: 15px;
   width: calc(100% / 2 - 20px);
 }
+
 form .input-box span.details {
   display: block;
   font-weight: 500;
   margin-bottom: 5px;
 }
+
 .user-details .input-box input {
   height: 45px;
   width: 100%;
@@ -63,19 +72,41 @@ form .input-box span.details {
   border-bottom-width: 2px;
   transition: all 0.3s ease;
 }
+
 .user-details .input-box input:focus,
 .user-details .input-box input:valid {
   border-color: #9b59b6;
 }
 
+/* Remember Me Checkbox */
+.remember-me-box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
 
+.remember-me-box input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #9b59b6;
+}
 
+.remember-me-box label {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+}
 
-
+/* Submit Button */
 form .button {
   height: 45px;
-  margin: 35px 0
+  margin: 35px 0 20px 0;
 }
+
 form .button input {
   height: 100%;
   width: 100%;
@@ -89,32 +120,191 @@ form .button input {
   transition: all 0.3s ease;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
+
 form .button input:hover {
   background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
 }
+
+form .button input:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 25px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.divider span {
+  padding: 0 15px;
+  color: #999;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Social Login Buttons Container */
+.social-login {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* Google Sign-In Button Wrapper */
+.google-signin-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.google-signin-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the Google button to match the design */
+.google-signin-wrapper ::ng-deep asl-google-signin-button {
+  width: 100%;
+}
+
+.google-signin-wrapper ::ng-deep asl-google-signin-button > div {
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+.google-signin-wrapper ::ng-deep iframe {
+  width: 100% !important;
+}
+
+/* Facebook Button */
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  height: 45px;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0 20px;
+}
+
+.social-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.social-btn svg {
+  flex-shrink: 0;
+}
+
+.social-btn span {
+  flex: 1;
+  text-align: center;
+}
+
+.facebook-btn {
+  background: #1877f2;
+  color: #fff;
+  border-color: #1877f2;
+}
+
+.facebook-btn:hover {
+  background: #166fe5;
+  border-color: #166fe5;
+}
+
+/* Links */
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.links a {
+  color: #9b59b6;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.links a:hover {
+  color: #71b7e6;
+  text-decoration: underline;
+}
+
+/* Error Messages */
+.text-danger {
+  color: #e74c3c;
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+}
+
 /* Responsive media query code for mobile devices */
 @media(max-width: 584px) {
   .container {
     max-width: 100%;
+    padding: 20px;
   }
+  
   form .user-details .input-box {
     margin-bottom: 15px;
     width: 100%;
   }
-  form .category {
-    width: 100%;
-  }
+  
   .content form .user-details {
     max-height: 300px;
     overflow-y: scroll;
   }
+  
   .user-details::-webkit-scrollbar {
     width: 5px;
   }
+
+  .social-btn {
+    font-size: 14px;
+  }
+
+  .social-btn span {
+    font-size: 14px;
+  }
 }
-/* Responsive media query code for mobile devices */
+
 @media(max-width: 459px) {
-  .container .content .category {
-    flex-direction: column;
+  .container .title {
+    font-size: 22px;
+  }
+
+  .social-btn {
+    height: 42px;
+    font-size: 13px;
   }
 }

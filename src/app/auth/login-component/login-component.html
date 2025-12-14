@@ -3,22 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link rel="stylesheet" href="login-component.css" />
   </head>
   <body>
     <div class="container">
-      <!-- Title section -->
       <div class="title">Login</div>
       <div class="content">
         <span class="text-danger">{{ errMsg }}</span>
         @for (item of errs;track item) {
         <span> {{ item }} </span> <br />
         }
-        <!-- Registration form -->
+
         <form (ngSubmit)="loginMethod()" #loginFrm="ngForm">
           <div class="user-details">
-            <!-- Input for Full Name -->
             <div class="input-box">
               <span class="details"> Email or user name </span>
               <input
@@ -30,11 +27,10 @@
                 required
               />
               <span [hidden]="account.valid || account.untouched" class="text-danger">
-                @if(password.hasError('required')) { this field is required }
+                @if(account.hasError('required')) { this field is required }
               </span>
             </div>
 
-            <!-- Input for Password -->
             <div class="input-box">
               <span class="details">Password</span>
               <input
@@ -54,26 +50,59 @@
                 number }
               </span>
             </div>
-            <div>
-              <label class="details" for="rememberMe"> rememberMe </label>
+
+            <div class="remember-me-box">
               <input
                 type="checkbox"
                 #rememberMe="ngModel"
                 [(ngModel)]="login.rememberMe"
                 name="rememberMe"
-                class="mx-1"
                 id="rememberMe"
               />
+              <label for="rememberMe">Remember Me</label>
             </div>
           </div>
 
-          <!-- Submit button -->
           <div class="button">
-            <input [disabled]="!loginFrm.form.valid" type="submit" value="login" />
+            <input [disabled]="!loginFrm.form.valid" type="submit" value="Login" />
           </div>
         </form>
-        <a class="" routerLink="/auth/register">Register</a> <br />
-        <a class="" routerLink="/auth/forgetPassword">forget Password</a>
+
+        <div class="divider">
+          <span>OR</span>
+        </div>
+
+        <div class="social-login">
+          <div class="google-signin-wrapper">
+            <asl-google-signin-button
+              type="standard"
+              size="large"
+              text="continue_with"
+              shape="rectangular"
+            >
+            </asl-google-signin-button>
+          </div>
+
+          <button class="social-btn facebook-btn" (click)="signInWithFacebook()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"
+              />
+            </svg>
+            <span>Continue with Facebook</span>
+          </button>
+        </div>
+
+        <div class="links">
+          <a routerLink="/auth/register">Don't have an account? Register</a>
+          <a routerLink="/auth/forgetPassword">Forgot Password?</a>
+        </div>
       </div>
     </div>
   </body>
