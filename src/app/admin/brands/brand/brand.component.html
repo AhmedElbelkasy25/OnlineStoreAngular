@@ -1,17 +1,21 @@
 <div class="container">
-  <a routerLink="/admin/brand/add" class="btn btn-primary"> Create Brand ➕</a>
-
-  @if (allBrands.length > 0) {
+  <a routerLink="/admin/brand/add" class="btn btn-primary mb-3"> Create Brand ➕</a>
+  @if(isLoading) {
+  <div class="loader-wrapper">
+    <div class="gradient-spinner"></div>
+    <p class="loading-text">Loading products...</p>
+  </div>
+  } @if (allBrands.length > 0 && !isLoading) {
 
   <div class="table-responsive">
-    <table class="table table-light">
+    <table class="table table-light text-center">
       <thead>
         <tr>
           <th scope="col">id</th>
           <th scope="col">name</th>
           <th scope="col">desciption</th>
           <th scope="col">status</th>
-          <th scope="col">Actions</th>
+          <th class="text-center" scope="col ">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -74,6 +78,6 @@
   </div>
 
   } @else{
-  <h1>there is no brands</h1>
+  <app-noItems></app-noItems>
   }
 </div>

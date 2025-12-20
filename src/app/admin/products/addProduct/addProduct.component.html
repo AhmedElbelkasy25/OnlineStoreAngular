@@ -1,0 +1,138 @@
+<div class="container">
+  @if (!submitted) {
+  <!-- FORM -->
+
+  <form #myfrm="ngForm" (ngSubmit)="submitForm()">
+    <!-- Name -->
+    <div class="mb-3">
+      <label class="form-label">Product Name</label>
+      <input
+        class="form-control"
+        name="name"
+        [(ngModel)]="prod.name"
+        required
+        minlength="3"
+        maxlength="100"
+        #name="ngModel"
+      />
+
+      @if (name.invalid && name.touched) {
+      <div class="text-danger">Name is required (3–100 characters)</div>
+      }
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea
+        class="form-control"
+        name="description"
+        [(ngModel)]="prod.description"
+        required
+        minlength="3"
+        #description="ngModel"
+      ></textarea>
+
+      @if (description.invalid && description.touched) {
+      <div class="text-danger">Description is required</div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Main Image</label>
+      <input
+        type="file"
+        class="form-control"
+        required
+        accept="image/*"
+        (change)="onFileSelected($event)"
+      />
+    </div>
+
+    <!-- Price -->
+    <div class="mb-3">
+      <label class="form-label">Price</label>
+      <input
+        type="number"
+        class="form-control"
+        name="price"
+        [(ngModel)]="prod.price"
+        required
+        min="1"
+      />
+    </div>
+
+    <!-- Quantity -->
+    <div class="mb-3">
+      <label class="form-label">Quantity</label>
+      <input
+        type="number"
+        class="form-control"
+        name="quantity"
+        [(ngModel)]="prod.quantity"
+        required
+        min="0"
+      />
+    </div>
+
+    <!-- Discount -->
+    <div class="mb-3">
+      <label class="form-label">Discount</label>
+      <input
+        type="number"
+        class="form-control"
+        name="discount"
+        required
+        [(ngModel)]="prod.discount"
+        min="0"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Catgeroy</label>
+      <select class="form-select" name="cat" [(ngModel)]="cat">
+        @for (item of allCats; track item.id) {
+        <option [value]="item.id">{{ item.name }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Brand</label>
+      <select class="form-select" name="brand" [(ngModel)]="brand">
+        @for (item of allBrands; track item.id) {
+        <option [value]="item.id">{{ item.name }}</option>
+        }
+      </select>
+    </div>
+    <!-- Status -->
+    <div class="mb-3">
+      <label class="form-label">Status</label>
+      <select class="form-select" name="status" [(ngModel)]="prod.status">
+        <option [ngValue]="true">Active</option>
+        <option [ngValue]="false">Inactive</option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary" [disabled]="myfrm.invalid">Preview</button>
+  </form>
+  } @else {
+  <!-- PREVIEW -->
+  <h3>You will create the following product:</h3>
+
+  <p><b>Name:</b> {{ prod.name }}</p>
+  <p><b>Description:</b> {{ prod.description }}</p>
+  <p><b>Price:</b> {{ prod.price }}</p>
+  <p><b>Quantity:</b> {{ prod.quantity }}</p>
+  <p><b>Discount:</b> {{ prod.discount }}</p>
+  <p><b>Status:</b> {{ prod.status }}</p>
+
+  <button class="btn btn-warning" (click)="submitForm()">Edit</button>
+  <button class="btn btn-success mx-2" (click)="addProduct()">Create Product</button>
+  } @if (errs.length > 0) {
+  <div class="shake error-inline">
+    @for (item of errs; track $index) {
+    <p>❌ {{ item }}</p>
+    }
+  </div>
+  }
+</div>

@@ -5,45 +5,47 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { NoItemsComponent } from '../../../shared/components/noItems/noItems.component';
 
 @Component({
   selector: 'app-brand',
   templateUrl: './brand.component.html',
   styleUrls: ['./brand.component.css'],
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, NoItemsComponent],
 })
 export class BrandComponent implements OnInit {
-  allBrands: IBrand[] = {} as IBrand[];
-
+  allBrands: IBrand[] = [];
+  isLoading: boolean = false;
   constructor(private brandService: BrandServiceService, private snack: MatSnackBar) {
     // this.allBrands = [];
-    debugger;
+  }
+  ngOnInit(): void {
+    this.isLoading = true;
     this.brandService.getallBrands().subscribe({
       next: (brand) => {
+        this.isLoading = false;
         this.allBrands = brand.brands;
         debugger;
         // console.log(this.allBrands);
       },
       error: (err) => {
-        console.log(err);
-        debugger;
+        this.isLoading = false;
         this.snack.open(err.error.msg, 'Close 🤷‍♂️', {
           duration: 4000,
           panelClass: ['snack-error'],
           horizontalPosition: 'right',
           verticalPosition: 'bottom',
         });
-        debugger;
       },
     });
-    debugger;
   }
-  ngOnInit(): void {}
 
   Delete(id: number) {
+    this.isLoading = true;
     this.brandService.deleteBrand(id).subscribe({
       next: (res) => {
         // alert(res.msg);
+        this.isLoading = false;
         Swal.fire({
           icon: 'success',
           title: 'Deleted!',
@@ -60,6 +62,7 @@ export class BrandComponent implements OnInit {
         this.allBrands = this.allBrands.filter((brand) => brand.id !== id);
       },
       error: (err) => {
+        this.isLoading = false;
         this.snack.open(err.error.msg, 'Close 🤷‍♂️', {
           duration: 4000,
           panelClass: ['snack-error'],

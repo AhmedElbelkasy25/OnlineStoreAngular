@@ -1,24 +1,23 @@
 <div class="container">
   <div [hidden]="submitted">
     <form #myfrm="ngForm" (submit)="submitForm()">
-      {{ category | json }}
       <div class="mb-3">
-        <label class="form-label" for="Name">Category Name</label>
+        <label class="form-label" for="Name">Brand Name</label>
         <input
           class="form-control"
-          [(ngModel)]="category!.name"
+          [(ngModel)]="newBrand.name"
           required
-          minlength="3"
+          pattern="^[A-Za-z0-9أ-ي\s]{3,100}$"
           name="Name"
           id="Name"
-          placeholder="Category Name"
+          placeholder="Brand Name"
           type="text"
           #name="ngModel"
         />
         <div [hidden]="name.valid || (name.invalid && name.untouched)" class="text-danger">
           @if(name.hasError('required')) {
           <p>this name is required</p>
-          } @if(name.hasError('minlength')){
+          } @if(name.hasError('pattern')){
           <p>the name must be in 3 to 100 charechter</p>
           }
         </div>
@@ -26,11 +25,11 @@
       <div class="mb-3">
         <label class="form-label" for="Description">Description</label>
         <input
-          [(ngModel)]="category!.description"
+          [(ngModel)]="newBrand.description"
           class="form-control"
           required
-          minlength="3"
-          placeholder="Category Description"
+          pattern="^[A-Za-z1-9أ-ي\s]{3,1000}$"
+          placeholder="Brand Description"
           name="Description"
           id="Description"
           type="textarea"
@@ -42,43 +41,43 @@
         >
           @if(description.hasError('required')) {
           <p>this description is required</p>
-          } @if(description.hasError('minlength')){
+          } @if(description.hasError('pattern')){
           <p>the description must be in 3 to 1000 charechter</p>
           }
         </div>
       </div>
       <div class="mb-3">
-        <select [(ngModel)]="category!.status" name="status" class="form-select">
+        <select [(ngModel)]="newBrand.status" name="status" class="form-select">
           <option [ngValue]="true">true</option>
           <option [ngValue]="false">false</option>
         </select>
       </div>
-      <input class="btn btn-primary" [disabled]="!myfrm.form.valid" value="Edit" type="submit" />
+      <input class="btn btn-primary" [disabled]="!myfrm.form.valid" value="Create" type="submit" />
     </form>
   </div>
 
   <div [hidden]="!submitted">
-    <h2>You Will Edit the following:</h2>
+    <h2>You Will Create the following:</h2>
     <div class="row">
       <div class="col-xs-3">Name:</div>
       <div class="col-xs-9">
-        <h2>{{ category!.name }}</h2>
+        <h2>{{ newBrand.name }}</h2>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-3">Description:</div>
       <div class="col-xs-9">
-        <h2>{{ category!.description }}</h2>
+        <h2>{{ newBrand.description }}</h2>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-3">status:</div>
       <div class="col-xs-9">
-        <h2>{{ category!.status }}</h2>
+        <h2>{{ newBrand.status }}</h2>
       </div>
     </div>
     <br />
     <button type="button" class="btn btn-warning" (click)="submitForm()">Edit</button>
-    <button type="button" class="btn btn-success mx-3" (click)="editCategory()">Ok...Submit</button>
+    <button type="button" class="btn btn-success mx-3" (click)="addBrand()">Ok...Create</button>
   </div>
 </div>

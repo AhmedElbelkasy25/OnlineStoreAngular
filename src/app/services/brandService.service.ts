@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
-
 import { IBrand } from '../models/ibrand';
 import { IEditBrandResponse } from '../interfaces/brand/IEditBrandResponse';
 import { IDeleteBrandResponse } from '../interfaces/brand/IDeleteBrandResponse';
 import { IBrandArrResponse } from '../interfaces/brand/IBrandArrResponse';
 import { IBrandResponse } from '../interfaces/brand/IBrandResponse';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +23,7 @@ export class BrandServiceService {
     return this.httpClient.get<IBrandArrResponse>(`${this.apiUrl}/Brands`);
   }
   getBrandById(id: number): Observable<IBrandResponse> {
+    debugger;
     return this.httpClient.get<IBrandResponse>(`${this.apiUrl}/Brands/${id}`);
   }
   addBrand(cat: IBrand): Observable<IBrand> {

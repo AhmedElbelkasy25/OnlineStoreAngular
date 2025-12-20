@@ -5,31 +5,37 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NoItemsComponent } from '../../../shared/components/noItems/noItems.component';
 @Component({
   selector: 'app-category',
   standalone: true,
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css'],
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, NoItemsComponent],
 })
 export class CategoryComponent implements OnInit {
-  allCategories!: ICategory[];
+  allCategories: ICategory[] = [];
+  isLoading: boolean = false;
 
   constructor(private catService: CategoryService, private snack: MatSnackBar) {
     // this.allCategories = [];
+    this.isLoading = true;
     this.catService.getallCategory().subscribe({
       next: (cat) => {
+        this.isLoading = false;
         this.allCategories = cat.categories;
 
         // console.log(this.allCategories);
       },
-      error: (err) =>
+      error: (err) => {
+        this.isLoading = false;
         this.snack.open(err.error.msg, 'Close 🤷‍♂️', {
           duration: 4000,
           panelClass: ['snack-error'],
           horizontalPosition: 'right',
           verticalPosition: 'bottom',
-        }),
+        });
+      },
     });
   }
   ngOnInit(): void {}

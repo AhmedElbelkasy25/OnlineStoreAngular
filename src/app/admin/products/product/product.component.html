@@ -1,0 +1,55 @@
+<div class="container">
+  <a routerLink="/admin/product/add" class="btn btn-primary mb-3"> Create Product ➕ </a>
+
+  @if (isLoading) {
+  <div class="loader-wrapper">
+    <div class="gradient-spinner"></div>
+    <p class="loading-text">Loading products...</p>
+  </div>
+  } @if (!isLoading && prods.length > 0) {
+  <div class="table-responsive">
+    <table class="table table-light text-center">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Rate</th>
+          <th>Status</th>
+          <th>Discount</th>
+          <th>Traffic</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (item of prods; track item.id) {
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.description }}</td>
+          <td>{{ item.price }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.rate }}</td>
+          <td>{{ item.status }}</td>
+          <td>{{ item.discount }}</td>
+          <td>{{ item.traffic }}</td>
+          <td>
+            <!-- Edit -->
+            <a routerLink="/admin/product/edit/{{ item.id }}" class="btn btn-success btn-sm me-1">
+              Edit
+            </a>
+
+            <button class="btn btn-danger btn-sm" (click)="ConfirmDelete(item.id)">Delete</button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  } @if (!isLoading && prods.length === 0) {
+  <app-noItems></app-noItems>
+  }
+</div>

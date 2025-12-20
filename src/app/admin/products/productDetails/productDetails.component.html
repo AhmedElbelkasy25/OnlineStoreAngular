@@ -1,0 +1,36 @@
+<div>
+  @if (isLoading) {
+  <div class="loader-wrapper">
+    <div class="gradient-spinner"></div>
+    <p class="loading-text">Loading products...</p>
+  </div>
+  } @if (!isLoading && prod) {
+  <div class="wrapper">
+    <div class="product-img">
+      <img [src]="prod.mainImg | EnvUrlPipe" height="420" width="327" [alt]="prod.name" />
+    </div>
+
+    <div class="product-info">
+      <div class="product-text">
+        <h1>{{ prod.name }}</h1>
+        <h2>{{ prod.category }}</h2>
+        <h2>{{ prod.brand }}</h2>
+        <p>
+          {{ prod.description }}
+        </p>
+
+        <span class="badge bg-primary mt-3 d-inline-block">
+          {{ prod.status }}
+        </span>
+
+        <div class="product-price-btn">
+          <p>
+            <span>{{ prod.price }}</span
+            >$
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>

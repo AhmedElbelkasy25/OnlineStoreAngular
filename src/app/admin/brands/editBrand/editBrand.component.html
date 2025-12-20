@@ -1,17 +1,16 @@
 <div class="container">
   <div [hidden]="submitted">
     <form #myfrm="ngForm" (submit)="submitForm()">
-      {{ category | json }}
       <div class="mb-3">
-        <label class="form-label" for="Name">Category Name</label>
+        <label class="form-label" for="Name">Brand Name</label>
         <input
           class="form-control"
-          [(ngModel)]="category!.name"
+          [(ngModel)]="brand!.name"
           required
           minlength="3"
           name="Name"
           id="Name"
-          placeholder="Category Name"
+          placeholder="Brand Name"
           type="text"
           #name="ngModel"
         />
@@ -26,11 +25,11 @@
       <div class="mb-3">
         <label class="form-label" for="Description">Description</label>
         <input
-          [(ngModel)]="category!.description"
+          [(ngModel)]="brand!.description"
           class="form-control"
           required
           minlength="3"
-          placeholder="Category Description"
+          placeholder="Brand Description"
           name="Description"
           id="Description"
           type="textarea"
@@ -48,7 +47,7 @@
         </div>
       </div>
       <div class="mb-3">
-        <select [(ngModel)]="category!.status" name="status" class="form-select">
+        <select [(ngModel)]="brand!.status" name="status" class="form-select">
           <option [ngValue]="true">true</option>
           <option [ngValue]="false">false</option>
         </select>
@@ -62,23 +61,23 @@
     <div class="row">
       <div class="col-xs-3">Name:</div>
       <div class="col-xs-9">
-        <h2>{{ category!.name }}</h2>
+        <h2>{{ brand!.name }}</h2>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-3">Description:</div>
       <div class="col-xs-9">
-        <h2>{{ category!.description }}</h2>
+        <h2>{{ brand!.description }}</h2>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-3">status:</div>
       <div class="col-xs-9">
-        <h2>{{ category!.status }}</h2>
+        <h2>{{ brand!.status }}</h2>
       </div>
     </div>
     <br />
     <button type="button" class="btn btn-warning" (click)="submitForm()">Edit</button>
-    <button type="button" class="btn btn-success mx-3" (click)="editCategory()">Ok...Submit</button>
+    <button type="button" class="btn btn-success mx-3" (click)="editbrand()">Ok...Submit</button>
   </div>
 </div>

@@ -1,0 +1,24 @@
+<div class="details-container">
+  <div class="details-card">
+    <h2>Brand Details</h2>
+
+    <div class="details-row">
+      <span class="label">Name:</span>
+      <span class="value">{{ brand.name }}</span>
+    </div>
+
+    <div class="details-row">
+      <span class="label">Description:</span>
+      <span class="value">{{ brand.description }}</span>
+    </div>
+
+    <div class="details-row">
+      <span class="label">Status:</span>
+      <span class="value" [ngClass]="{ active: brand.status, inactive: !brand.status }">
+        {{ brand.status ? 'Active' : 'Inactive' }}
+      </span>
+    </div>
+
+    <button class="back-btn" routerLink="/admin/brand">Back</button>
+  </div>
+</div>

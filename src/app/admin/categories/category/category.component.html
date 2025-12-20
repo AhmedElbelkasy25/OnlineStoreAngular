@@ -1,10 +1,15 @@
 <div class="container">
-  <a routerLink="/admin/category/add" class="btn btn-primary"> Create Category ➕</a>
+  <a routerLink="/admin/category/add" class="btn btn-primary mb-3"> Create Category ➕</a>
 
-  @if (allCategories.length > 0) {
+  @if(isLoading) {
+  <div class="loader-wrapper">
+    <div class="gradient-spinner"></div>
+    <p class="loading-text">Loading products...</p>
+  </div>
+  } @if (allCategories.length >0 && !isLoading) {
 
   <div class="table-responsive">
-    <table class="table table-light">
+    <table class="table table-light text-center">
       <thead>
         <tr>
           <th scope="col">id</th>
@@ -73,7 +78,7 @@
     </table>
   </div>
 
-  } @else{
-  <h1>there is no catgeories</h1>
+  } @if (!isLoading && allCategories.length === 0) {
+  <app-noItems></app-noItems>
   }
 </div>

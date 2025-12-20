@@ -1,0 +1,28 @@
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.gradient-spinner {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: conic-gradient(#0d6efd, #6f42c1, #0d6efd);
+  mask: radial-gradient(circle 60%, transparent 61%);
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  margin-top: 15px;
+  font-weight: 500;
+  color: #6c757d;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

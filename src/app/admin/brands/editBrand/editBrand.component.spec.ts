@@ -1,22 +1,19 @@
 /* tslint:disable:no-unused-variable */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { EditBrandComponent } from './editBrand.component';
 
-import { BrandComponent } from './brand.component';
-
-describe('BrandComponent', () => {
-  let component: BrandComponent;
-  let fixture: ComponentFixture<BrandComponent>;
+describe('EditBrandComponent', () => {
+  let component: EditBrandComponent;
+  let fixture: ComponentFixture<EditBrandComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [BrandComponent],
+      declarations: [EditBrandComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BrandComponent);
+    fixture = TestBed.createComponent(EditBrandComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

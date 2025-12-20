@@ -26,7 +26,7 @@ export class CategoryDetailsComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
-        alert(err);
+        alert(err.error.msg);
       },
     });
   }

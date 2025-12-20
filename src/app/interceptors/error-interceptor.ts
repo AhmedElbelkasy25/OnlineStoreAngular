@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthServiceService);
   const snackbar = inject(MatSnackBar);
+
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401) {
