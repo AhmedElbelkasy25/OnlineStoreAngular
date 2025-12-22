@@ -3,7 +3,7 @@
   @if(isLoading) {
   <div class="loader-wrapper">
     <div class="gradient-spinner"></div>
-    <p class="loading-text">Loading products...</p>
+    <p class="loading-text">Loading brands...</p>
   </div>
   } @if (allBrands.length > 0 && !isLoading) {
 
@@ -77,7 +77,7 @@
     </table>
   </div>
 
-  } @else{
+  } @if( !isLoading && allBrands.length === 0){
   <app-noItems></app-noItems>
   }
 </div>

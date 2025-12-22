@@ -3,16 +3,18 @@ import { IBrand } from '../../../models/ibrand';
 import { BrandServiceService } from '../../../services/brandService.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { NotFoundComponent } from '../../NotFound/NotFound.component';
 
 @Component({
   selector: 'app-BrandDetails',
   templateUrl: './BrandDetails.component.html',
   styleUrls: ['./BrandDetails.component.css'],
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, NotFoundComponent],
 })
 export class BrandDetailsComponent implements OnInit {
   currentId: number = 0;
   brand: IBrand = {} as IBrand;
+  notFound: boolean = false;
   constructor(private activeRoute: ActivatedRoute, private brandService: BrandServiceService) {}
 
   ngOnInit() {
@@ -21,12 +23,13 @@ export class BrandDetailsComponent implements OnInit {
     });
     this.brandService.getBrandById(this.currentId)?.subscribe({
       next: (res) => {
+        this.notFound = false;
         this.brand = res.brand;
         console.log(res);
       },
       error: (err) => {
         console.log(err);
-        alert(err);
+        this.notFound = true;
       },
     });
   }

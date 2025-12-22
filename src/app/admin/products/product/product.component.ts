@@ -6,25 +6,38 @@ import { RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { NoItemsComponent } from '../../../shared/components/noItems/noItems.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
-  imports: [RouterLink, NoItemsComponent, MatProgressSpinnerModule],
+  imports: [RouterLink, NoItemsComponent, MatProgressSpinnerModule, FormsModule],
 })
 export class ProductComponent implements OnInit {
   prods: IProduct[] = [];
   isLoading: boolean = false;
+  currentPage: number = 0;
+  pageSize: number = 0;
+  totalItems: number = 0;
+  totalPages: number = 0;
+  howManyItems: number = 50;
   constructor(private prodService: ProductServiceService, private snack: MatSnackBar) {
     this.prods = [];
   }
 
   ngOnInit() {
     this.isLoading = true;
-    this.prodService.getAllProducts().subscribe({
+    this.loadProducts();
+  }
+
+  loadProducts(page: number = 1) {
+    this.prodService.getAllProducts(page, this.howManyItems).subscribe({
       next: (res) => {
-        this.prods = res.products;
+        this.prods = res.allProducts.products;
+        this.currentPage = res.allProducts.currentPage;
+        this.pageSize = res.allProducts.pageSize;
+        this.totalPages = res.allProducts.totalPages;
         this.isLoading = false;
       },
       error: (err) => {
@@ -37,6 +50,10 @@ export class ProductComponent implements OnInit {
         });
       },
     });
+  }
+
+  onPageSizeChange() {
+    this.loadProducts(1);
   }
 
   ConfirmDelete(id: number) {

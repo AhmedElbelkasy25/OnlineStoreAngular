@@ -1,3 +1,4 @@
+@if(!notFound) {
 <div class="details-container">
   <div class="details-card">
     <h2>Brand Details</h2>
@@ -19,6 +20,9 @@
       </span>
     </div>
 
-    <button class="back-btn" routerLink="/admin/brand">Back</button>
+    <button class="back-btn" routerLink="/admin/brand">All Brands</button>
   </div>
 </div>
+} @else {
+<app-NotFound></app-NotFound>
+}

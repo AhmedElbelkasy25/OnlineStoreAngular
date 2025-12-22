@@ -11,4 +11,6 @@ export interface IProductDetails {
   traffic: number;
   category: string;
   brand: string;
+  categoryId: number;
+  brandId: number;
 }

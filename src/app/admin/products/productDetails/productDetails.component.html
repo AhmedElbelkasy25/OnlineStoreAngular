@@ -1,8 +1,9 @@
+@if(!notFound) {
 <div>
   @if (isLoading) {
   <div class="loader-wrapper">
     <div class="gradient-spinner"></div>
-    <p class="loading-text">Loading products...</p>
+    <p class="loading-text">Loading product...</p>
   </div>
   } @if (!isLoading && prod) {
   <div class="wrapper">
@@ -29,8 +30,14 @@
             >$
           </p>
         </div>
+        <div class="text-center">
+          <a class="btn btn-outline-primary" routerLink="/admin/product">All Products</a>
+        </div>
       </div>
     </div>
   </div>
   }
 </div>
+} @else {
+<app-NotFound></app-NotFound>
+}

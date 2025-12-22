@@ -3,16 +3,18 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CategoryService } from '../../../services/category-service.service';
 import { ICategory } from '../../../models/icategory';
 import { CommonModule } from '@angular/common';
+import { NotFoundComponent } from '../../NotFound/NotFound.component';
 
 @Component({
   selector: 'app-categoryDetails',
   templateUrl: './categoryDetails.component.html',
   styleUrls: ['./categoryDetails.component.css'],
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, NotFoundComponent],
 })
 export class CategoryDetailsComponent implements OnInit {
   currentId: number = 0;
   category: ICategory = {} as ICategory;
+  notFound: boolean = false;
   constructor(private activeRoute: ActivatedRoute, private catService: CategoryService) {}
 
   ngOnInit() {
@@ -21,12 +23,12 @@ export class CategoryDetailsComponent implements OnInit {
     });
     this.catService.getCategoryById(this.currentId)?.subscribe({
       next: (res) => {
+        this.notFound = false;
         this.category = res.category;
         console.log(res);
       },
       error: (err) => {
-        console.log(err);
-        alert(err.error.msg);
+        this.notFound = true;
       },
     });
   }

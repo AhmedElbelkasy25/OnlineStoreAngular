@@ -1,7 +1,7 @@
 <div class="container">
   @if (!submitted) {
   <!-- FORM -->
-
+  {{ prod | json }}
   <form #myfrm="ngForm" (ngSubmit)="submitForm()">
     <!-- Name -->
     <div class="mb-3">
@@ -43,13 +43,19 @@
       <input
         type="file"
         class="form-control"
+        (change)="onFileSelected($event)"
         required
         accept="image/*"
-        (change)="onFileSelected($event)"
       />
     </div>
 
-    <!-- Price -->
+    <div class="mb-4">
+      @if (imagePreview) {
+      <img [src]="imagePreview" height="130" alt="New image preview" />
+      } @else {
+      <img [src]="prod.mainImg | EnvUrlPipe" height="130" alt="Current image" />
+      }
+    </div>
     <div class="mb-3">
       <label class="form-label">Price</label>
       <input
@@ -89,18 +95,18 @@
     </div>
     <div class="mb-3">
       <label class="form-label">Catgeroy</label>
-      <select class="form-select" name="cat" [(ngModel)]="cat">
+      <select class="form-select" name="categoryId" [(ngModel)]="prod.categoryId">
         @for (item of allCats; track item.id) {
-        <option [value]="item.id">{{ item.name }}</option>
+        <option [ngValue]="item.id">{{ item.name }}</option>
         }
       </select>
     </div>
 
     <div class="mb-3">
       <label class="form-label">Brand</label>
-      <select class="form-select" name="brand" [(ngModel)]="brand">
+      <select class="form-select" name="brandId" [(ngModel)]="prod.brandId">
         @for (item of allBrands; track item.id) {
-        <option [value]="item.id">{{ item.name }}</option>
+        <option [ngValue]="item.id">{{ item.name }}</option>
         }
       </select>
     </div>
@@ -127,12 +133,13 @@
   <p><b>Status:</b> {{ prod.status }}</p>
 
   <button class="btn btn-warning" (click)="submitForm()">Edit</button>
-  <button class="btn btn-success mx-2" (click)="addProduct()">Create Product</button>
-  } @if (errs.length > 0) {
+  <button class="btn btn-success mx-2" (click)="editProduct()">Edit Product</button>
+  }
+  <!-- @if (errs.length > 0) {
   <div class="shake error-inline">
     @for (item of errs; track $index) {
     <p>❌ {{ item }}</p>
     }
   </div>
-  }
+  } -->
 </div>

@@ -26,3 +26,64 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+
+/* ------------------------------------------------------------------------------- */
+
+
+
+.page-size-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.87);
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+}
+
+.page-size-control span {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.material-select-wrapper {
+  position: relative;
+  min-width: 72px;
+}
+
+.material-select {
+  appearance: none;
+  background: transparent; /* ✅ Now fully transparent */
+  border: none;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  color: rgba(0, 0, 0, 0.87);
+  padding: 8px 24px 8px 8px;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+  max-width: 96px;
+  transition: border-color 0.2s ease;
+  /* Optional: prevent background flash on mobile */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.material-select:focus {
+  border-bottom-color: #1976d2; /* Material primary */
+}
+
+/* Custom dropdown arrow */
+.material-select-wrapper::after {
+  content: "▾";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 12px;
+  pointer-events: none;
+  font-family: 'Segoe UI', sans-serif;
+}

@@ -12,6 +12,7 @@ import { EditBrandComponent } from './brands/editBrand/editBrand.component';
 import { ProductComponent } from './products/product/product.component';
 import { AddProductComponent } from './products/addProduct/addProduct.component';
 import { ProductDetailsComponent } from './products/productDetails/productDetails.component';
+import { EditProductComponent } from './products/editProduct/editProduct.component';
 
 const routes: Routes = [
   {
@@ -78,7 +79,7 @@ const routes: Routes = [
       },
       {
         path: 'edit/:id',
-        component: EditBrandComponent,
+        component: EditProductComponent,
       },
     ],
   },

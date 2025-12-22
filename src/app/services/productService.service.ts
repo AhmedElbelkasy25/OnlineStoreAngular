@@ -2,12 +2,10 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IProductArr } from '../interfaces/products/IProductArr';
-
 import { IProductCreate } from '../interfaces/products/IProductCreate';
-import { IProduct } from '../models/iproduct';
 import { IStringGeneralResponse } from '../interfaces/general/IStringGeneralResponse';
 import { IProductResponse } from '../interfaces/products/IProductResponse';
+import { IGetProductResponse } from '../interfaces/products/IGetProductResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -20,8 +18,10 @@ export class ProductServiceService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAllProducts(): Observable<IProductArr> {
-    return this.httpClient.get<IProductArr>(`${this.apiUrl}/products`);
+  getAllProducts(page: number, items: number): Observable<IGetProductResponse> {
+    return this.httpClient.get<IGetProductResponse>(
+      `${this.apiUrl}/products?page=${page}&items=${items}`
+    );
   }
 
   getProductById(id: number): Observable<IProductResponse> {
@@ -33,10 +33,8 @@ export class ProductServiceService {
     return this.httpClient.post<IProductCreate>(`${this.apiUrl}/Products`, product);
   }
 
-  editProduct(product: IProduct): Observable<IProductCreate> {
-    return this.httpClient.put<IProductCreate>(`${this.apiUrl}/Products`, product, {
-      headers: this.jsonHeader,
-    });
+  editProduct(product: FormData): Observable<IProductCreate> {
+    return this.httpClient.put<IProductCreate>(`${this.apiUrl}/Products`, product);
   }
 
   deleteProduct(id: number): Observable<IStringGeneralResponse> {

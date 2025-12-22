@@ -55,13 +55,23 @@ export class AddProductComponent implements OnInit {
 
   getAllCategories() {
     this.catService.getallCategory().subscribe({
-      next: (res) => (this.allCats = res.categories),
+      next: (res) => {
+        this.allCats = res.categories;
+        if (this.allCats.length > 0) {
+          this.cat = this.allCats[0].id;
+        }
+      },
     });
   }
 
   getAllBrands() {
     this.brandService.getallBrands().subscribe({
-      next: (res) => (this.allBrands = res.brands),
+      next: (res) => {
+        this.allBrands = res.brands;
+        if (this.allBrands.length > 0) {
+          this.brand = this.allBrands[0].id;
+        }
+      },
     });
   }
 
