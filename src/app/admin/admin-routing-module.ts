@@ -13,6 +13,7 @@ import { ProductComponent } from './products/product/product.component';
 import { AddProductComponent } from './products/addProduct/addProduct.component';
 import { ProductDetailsComponent } from './products/productDetails/productDetails.component';
 import { EditProductComponent } from './products/editProduct/editProduct.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   {
@@ -83,7 +84,15 @@ const routes: Routes = [
       },
     ],
   },
-
+  {
+    path: 'user',
+    children: [
+      {
+        path: '',
+        component: UserComponent,
+      },
+    ],
+  },
   {
     path: '**',
     component: NotFoundComponent,
